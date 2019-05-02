@@ -1,6 +1,7 @@
 import React from "react";
 import Navigation from "./components/navigation/Navigation";
 import Logo from "./components/logo/Logo";
+import LinkForm from "./components/linkform/LinkForm";
 import "./App.css";
 
 function App() {
@@ -8,8 +9,8 @@ function App() {
     <div className="App">
       <Navigation />
       <Logo />
+      <LinkForm />
       {
-        // <LinkForm />
         // <Image />
       }
     </div>
