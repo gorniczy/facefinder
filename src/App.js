@@ -3,6 +3,7 @@ import Navigation from "./components/navigation/Navigation"
 import Logo from "./components/logo/Logo"
 import Rank from "./components/rank/Rank"
 import LinkForm from "./components/linkform/LinkForm"
+import Image from "./components/image/Image"
 import Particles from "react-particles-js"
 import Clarifai from "clarifai"
 import "./App.css"
@@ -31,7 +32,8 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      input: ""
+      input: "",
+      imageURL: ""
     }
   }
 
@@ -63,9 +65,7 @@ class App extends React.Component {
         <Logo />
         <Rank />
         <LinkForm onChange={this.onChange} onSubmit={this.onSubmit} />
-        {
-          // <Image />
-        }
+        <Image imageURL={this.state.imageURL} />
       </div>
     )
   }
