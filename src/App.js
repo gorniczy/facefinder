@@ -33,7 +33,7 @@ class App extends React.Component {
     super()
     this.state = {
       input: "",
-      imageURL: ""
+      imageURL: "https://aiahouston.org/media/content-images/placeholder-square.jpg"
     }
   }
 
@@ -44,11 +44,9 @@ class App extends React.Component {
   }
 
   onSubmit = () => {
-
     this.setState({
       imageURL: this.state.input
     })
-
     app.models
       .predict(
         Clarifai.FACE_DETECT_MODEL,
