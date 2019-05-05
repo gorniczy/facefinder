@@ -3,6 +3,7 @@ import Navigation from "./components/navigation/Navigation"
 import Logo from "./components/logo/Logo"
 import Rank from "./components/rank/Rank"
 import LinkForm from "./components/linkform/LinkForm"
+import Image from "./components/image/Image"
 import Particles from "react-particles-js"
 import Clarifai from "clarifai"
 import "./App.css"
@@ -31,24 +32,28 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      input: ""
+      input: "",
+      imageURL: "https://aiahouston.org/media/content-images/placeholder-square.jpg"
     }
   }
 
   onChange = event => {
-    this.setState = {
+    this.setState({
       input: event.target.value
-    }
+    })
   }
 
   onSubmit = () => {
+    this.setState({
+      imageURL: this.state.input
+    })
     app.models
       .predict(
-        Clarifai.GENERAL_MODEL,
-        "https://samples.clarifai.com/metro-north.jpg"
+        Clarifai.FACE_DETECT_MODEL,
+        this.state.input
       )
       .then(response => {
-        console.log(response)
+        console.log(response.outputs[0].data.regions[0].region_info.bounding_box)
       })
       .catch(err => {
         console.log(err)
@@ -63,9 +68,7 @@ class App extends React.Component {
         <Logo />
         <Rank />
         <LinkForm onChange={this.onChange} onSubmit={this.onSubmit} />
-        {
-          // <Image />
-        }
+        <Image imageURL={this.state.imageURL} />
       </div>
     )
   }
