@@ -1,11 +1,18 @@
-import React from "react";
+import React from "react"
 
-const Image = (props) => {
+const Image = props => {
   return (
     <div className="center">
-      <img src={props.imageURL} alt={'processed file'} />
+      <div className="pa5">
+        <img
+          src={props.imageURL}
+          alt={"processed file"}
+          width="500px"
+          height="auto"
+        />
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default Image;
+export default Image

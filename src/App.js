@@ -38,19 +38,24 @@ class App extends React.Component {
   }
 
   onChange = event => {
-    this.setState = {
+    this.setState({
       input: event.target.value
-    }
+    })
   }
 
   onSubmit = () => {
+
+    this.setState({
+      imageURL: this.state.input
+    })
+
     app.models
       .predict(
-        Clarifai.GENERAL_MODEL,
-        "https://samples.clarifai.com/metro-north.jpg"
+        Clarifai.FACE_DETECT_MODEL,
+        this.state.input
       )
       .then(response => {
-        console.log(response)
+        console.log(response.outputs[0].data.regions[0].region_info.bounding_box)
       })
       .catch(err => {
         console.log(err)
