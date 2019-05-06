@@ -33,8 +33,29 @@ class App extends React.Component {
     super()
     this.state = {
       input: "",
-      imageURL: "https://aiahouston.org/media/content-images/placeholder-square.jpg"
+      imageURL: "https://aiahouston.org/media/content-images/placeholder-square.jpg",
+      box: {}
     }
+  }
+
+  calculateFaceLocation = (data) => {
+    const clarifaiCoordinates = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById('linkedInmage');
+    const width = Number(image.width);
+    const height = Number(image.height);
+    return {
+      leftCol: clarifaiCoordinates.left_col * width,
+      topRow: clarifaiCoordinates.top_row * height,
+      rightCol: width - (clarifaiCoordinates.right_col * width),
+      bottomRow: height - (clarifaiCoordinates.bottom_row *height)
+    }
+  }
+
+  frameTheFace = (box) => {
+    console.log(box);
+    this.setState({
+      box: box
+    })
   }
 
   onChange = event => {
@@ -52,12 +73,8 @@ class App extends React.Component {
         Clarifai.FACE_DETECT_MODEL,
         this.state.input
       )
-      .then(response => {
-        console.log(response.outputs[0].data.regions[0].region_info.bounding_box)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+      .then(response => this.frameTheFace(this.calculateFaceLocation(response)))
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -68,7 +85,7 @@ class App extends React.Component {
         <Logo />
         <Rank />
         <LinkForm onChange={this.onChange} onSubmit={this.onSubmit} />
-        <Image imageURL={this.state.imageURL} />
+        <Image box={this.state.box} imageURL={this.state.imageURL} />
       </div>
     )
   }
