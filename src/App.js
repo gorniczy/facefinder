@@ -4,6 +4,7 @@ import Logo from "./components/logo/Logo"
 import Rank from "./components/rank/Rank"
 import LinkForm from "./components/linkform/LinkForm"
 import Image from "./components/image/Image"
+import Signin from "./components/signin/Signin"
 import Particles from "react-particles-js"
 import Clarifai from "clarifai"
 import "./App.css"
@@ -47,7 +48,7 @@ class App extends React.Component {
       leftCol: clarifaiCoordinates.left_col * width,
       topRow: clarifaiCoordinates.top_row * height,
       rightCol: width - (clarifaiCoordinates.right_col * width),
-      bottomRow: height - (clarifaiCoordinates.bottom_row *height)
+      bottomRow: height - (clarifaiCoordinates.bottom_row * height)
     }
   }
 
@@ -82,6 +83,7 @@ class App extends React.Component {
       <div className="App">
         <Particles className="particles" params={particlesParams} />
         <Navigation />
+        <Signin />
         <Logo />
         <Rank />
         <LinkForm onChange={this.onChange} onSubmit={this.onSubmit} />
