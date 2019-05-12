@@ -12,7 +12,15 @@ const Image = props => {
           width="500px"
           height="auto"
         />
-        <div className="bounding-box" style={{top: props.box.topRow, right: props.box.rightCol, bottom: props.box.bottomRow, left: props.box.leftCol}}></div>
+        <div
+          className="bounding-box"
+          style={{
+            top: props.box.topRow,
+            right: props.box.rightCol,
+            bottom: props.box.bottomRow,
+            left: props.box.leftCol
+          }}
+        />
       </div>
     </div>
   )

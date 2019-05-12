@@ -58,7 +58,7 @@ class App extends React.Component {
   frameTheFace = box => {
     console.log(box)
     this.setState({
-      box: box
+      box
     })
   }
 
