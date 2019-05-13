@@ -1,7 +1,7 @@
 import React from "react"
 import Tilt from "react-tilt"
 import face from "./facial-recognition.svg"
-import './Logo.css'
+import "./Logo.css"
 
 const Logo = () => {
   return (
@@ -12,7 +12,7 @@ const Logo = () => {
         style={{ height: 100, width: 100 }}
       >
         <div className="Tilt-inner">
-          <img src={face} alt="face"/>
+          <img src={face} alt="face" />
         </div>
       </Tilt>
     </div>

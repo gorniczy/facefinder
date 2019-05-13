@@ -5,6 +5,7 @@ import Rank from "./components/rank/Rank"
 import LinkForm from "./components/linkform/LinkForm"
 import Image from "./components/image/Image"
 import Signin from "./components/signin/Signin"
+import Register from "./components/register/Register"
 import Particles from "react-particles-js"
 import Clarifai from "clarifai"
 import "./App.css"
@@ -37,7 +38,7 @@ class App extends React.Component {
       imageURL:
         "https://aiahouston.org/media/content-images/placeholder-square.jpg",
       box: {},
-      route: "signin"
+      route: "register"
     }
   }
 
@@ -58,7 +59,7 @@ class App extends React.Component {
   frameTheFace = box => {
     console.log(box)
     this.setState({
-      box: box
+      box
     })
   }
 
@@ -78,10 +79,8 @@ class App extends React.Component {
       .catch(err => console.log(err))
   }
 
-  onRouteChange = () => {
-    this.setState({
-      route: this.state.route === "signin" ? "home" : "signin"
-    })
+  onRouteChange = route => {
+    this.setState({ route })
   }
 
   render() {
@@ -90,14 +89,16 @@ class App extends React.Component {
         <Particles className="particles" params={particlesParams} />
         <Navigation onRouteChange={this.onRouteChange} />
         <Logo />
-        {this.state.route === "signin" ? (
-          <Signin onRouteChange={this.onRouteChange} />
-        ) : (
+        {this.state.route === "home" ? (
           <div>
             <Rank />
             <LinkForm onChange={this.onChange} onSubmit={this.onSubmit} />
             <Image box={this.state.box} imageURL={this.state.imageURL} />
           </div>
+        ) : this.state.route === "signin" ? (
+          <Signin onRouteChange={this.onRouteChange} />
+        ) : (
+          <Register onRouteChange={this.onRouteChange} />
         )}
       </div>
     )
