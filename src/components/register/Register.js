@@ -3,11 +3,11 @@ import React from "react"
 const Register = props => {
   return (
     <main className="pa4 black-80 center">
-      <form className="measure">
+      <div className="measure">
         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
           <legend className="align-text f3 fw6 ph0 mh0">Register</legend>
           <div className="mt3">
-            <label className="db fw6 lh-copy f6" for="name">
+            <label className="db fw6 lh-copy f6" htmlFor="name">
               Name
             </label>
             <input
@@ -18,7 +18,7 @@ const Register = props => {
             />
           </div>
           <div className="mt3">
-            <label className="db fw6 lh-copy f6" for="email-address">
+            <label className="db fw6 lh-copy f6" htmlFor="email-address">
               Email
             </label>
             <input
@@ -29,7 +29,7 @@ const Register = props => {
             />
           </div>
           <div className="mv3">
-            <label className="db fw6 lh-copy f6" for="password">
+            <label className="db fw6 lh-copy f6" htmlFor="password">
               Password
             </label>
             <input
@@ -48,7 +48,7 @@ const Register = props => {
             value="Register"
           />
         </div>
-      </form>
+      </div>
     </main>
   )
 }
