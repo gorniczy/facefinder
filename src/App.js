@@ -38,7 +38,8 @@ class App extends React.Component {
       imageURL:
         "https://aiahouston.org/media/content-images/placeholder-square.jpg",
       box: {},
-      route: "register"
+      route: "signin",
+      isSignedIn: false
     }
   }
 
@@ -80,6 +81,11 @@ class App extends React.Component {
   }
 
   onRouteChange = route => {
+    if (route === "signout") {
+      this.setState({ isSignedIn: false })
+    } else if (route === "home") {
+      this.setState({ isSignedIn: true })
+    }
     this.setState({ route })
   }
 
@@ -87,7 +93,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <Particles className="particles" params={particlesParams} />
-        <Navigation onRouteChange={this.onRouteChange} />
+        <Navigation
+          onRouteChange={this.onRouteChange}
+          isSignedIn={this.state.isSignedIn}
+        />
         <Logo />
         {this.state.route === "home" ? (
           <div>
