@@ -90,21 +90,22 @@ class App extends React.Component {
   }
 
   render() {
+    const { isSignedIn, route, box, imageURL } = this.state;
     return (
       <div className="App">
         <Particles className="particles" params={particlesParams} />
         <Navigation
           onRouteChange={this.onRouteChange}
-          isSignedIn={this.state.isSignedIn}
+          isSignedIn={isSignedIn}
         />
         <Logo />
-        {this.state.route === "home" ? (
+        {route === "home" ? (
           <div>
             <Rank />
             <LinkForm onChange={this.onChange} onSubmit={this.onSubmit} />
-            <Image box={this.state.box} imageURL={this.state.imageURL} />
+            <Image box={box} imageURL={imageURL} />
           </div>
-        ) : this.state.route === "signin" ? (
+        ) : route === "signin" ? (
           <Signin onRouteChange={this.onRouteChange} />
         ) : (
           <Register onRouteChange={this.onRouteChange} />
