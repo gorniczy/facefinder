@@ -90,7 +90,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { isSignedIn, route, box, imageURL } = this.state;
+    const { isSignedIn, route, box, imageURL } = this.state
     return (
       <div className="App">
         <Particles className="particles" params={particlesParams} />

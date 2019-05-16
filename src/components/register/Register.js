@@ -1,6 +1,6 @@
 import React from "react"
 
-const Register = props => {
+const Register = ({ onRouteChange }) => {
   return (
     <main className="pa4 black-80 center">
       <div className="measure">
@@ -42,7 +42,7 @@ const Register = props => {
         </fieldset>
         <div className="center">
           <input
-            onClick={() => props.onRouteChange('home')}
+            onClick={() => onRouteChange("home")}
             className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
             type="submit"
             value="Register"
