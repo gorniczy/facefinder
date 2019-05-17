@@ -37,7 +37,12 @@ class App extends React.Component {
       input: "",
       imageURL:
         "https://aiahouston.org/media/content-images/placeholder-square.jpg",
-      box: {},
+      box: {
+        leftCol: 0,
+        topRow: 0,
+        rightCol: 0,
+        bottomRow: 0
+      },
       route: "signin",
       isSignedIn: false
     }
