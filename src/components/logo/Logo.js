@@ -5,7 +5,7 @@ import "./Logo.css"
 
 const Logo = () => {
   return (
-    <div className="ma4 mt0 pointer logo">
+    <div className="pa4 mt0 pointer logo">
       <Tilt
         className="Tilt"
         options={{ max: 25 }}

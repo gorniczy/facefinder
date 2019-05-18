@@ -99,11 +99,11 @@ class App extends React.Component {
     return (
       <div className="App">
         <Particles className="particles" params={particlesParams} />
+        <Logo />
         <Navigation
           onRouteChange={this.onRouteChange}
           isSignedIn={isSignedIn}
         />
-        <Logo />
         {route === "home" ? (
           <div>
             <Rank />
