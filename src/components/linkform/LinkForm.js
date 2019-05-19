@@ -5,7 +5,7 @@ const LinkForm = ({ onChange, onSubmit }) => {
   return (
     <div>
       <p className="f3 center">
-        {"If you need help spotting faces in your pictures, let us help you"}
+        {"Is there a face in your picture? Give us a chance to recognize it!"}
       </p>
       <div className="center">
         <div className="form pa4 br3 shadow-5">
