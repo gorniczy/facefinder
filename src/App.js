@@ -37,7 +37,12 @@ class App extends React.Component {
       input: "",
       imageURL:
         "https://aiahouston.org/media/content-images/placeholder-square.jpg",
-      box: {},
+      box: {
+        leftCol: 0,
+        topRow: 0,
+        rightCol: 0,
+        bottomRow: 0
+      },
       route: "signin",
       isSignedIn: false
     }
@@ -59,9 +64,7 @@ class App extends React.Component {
 
   frameTheFace = box => {
     console.log(box)
-    this.setState({
-      box
-    })
+    this.setState({ box })
   }
 
   onChange = event => {
@@ -80,6 +83,10 @@ class App extends React.Component {
       .catch(err => console.log(err))
   }
 
+  handleKeyPress = e => {
+    return e.key === "Enter" ? this.onSubmit() : null
+  }
+
   onRouteChange = route => {
     if (route === "signout") {
       this.setState({ isSignedIn: false })
@@ -90,19 +97,23 @@ class App extends React.Component {
   }
 
   render() {
-    const { isSignedIn, route, box, imageURL } = this.state;
+    const { isSignedIn, route, box, imageURL } = this.state
     return (
       <div className="App">
         <Particles className="particles" params={particlesParams} />
+        <Logo />
         <Navigation
           onRouteChange={this.onRouteChange}
           isSignedIn={isSignedIn}
         />
-        <Logo />
         {route === "home" ? (
           <div>
             <Rank />
-            <LinkForm onChange={this.onChange} onSubmit={this.onSubmit} />
+            <LinkForm
+              onChange={this.onChange}
+              onSubmit={this.onSubmit}
+              handleKeyPress={this.handleKeyPress}
+            />
             <Image box={box} imageURL={imageURL} />
           </div>
         ) : route === "signin" ? (

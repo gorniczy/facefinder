@@ -1,13 +1,13 @@
 import React from "react"
 import "./Image.css"
 
-const Image = props => {
+const Image = ({ imageURL, box }) => {
   return (
     <div className="center">
       <div className="absolute pa3">
         <img
           id="linkedInmage"
-          src={props.imageURL}
+          src={imageURL}
           alt={"processed file"}
           width="500px"
           height="auto"
@@ -15,10 +15,10 @@ const Image = props => {
         <div
           className="bounding-box"
           style={{
-            top: props.box.topRow,
-            right: props.box.rightCol,
-            bottom: props.box.bottomRow,
-            left: props.box.leftCol
+            top: box.topRow,
+            right: box.rightCol,
+            bottom: box.bottomRow,
+            left: box.leftCol
           }}
         />
       </div>
