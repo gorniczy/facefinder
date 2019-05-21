@@ -64,9 +64,7 @@ class App extends React.Component {
 
   frameTheFace = box => {
     console.log(box)
-    this.setState({
-      box
-    })
+    this.setState({ box })
   }
 
   onChange = event => {
@@ -83,6 +81,10 @@ class App extends React.Component {
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
       .then(response => this.frameTheFace(this.calculateFaceLocation(response)))
       .catch(err => console.log(err))
+  }
+
+  handleKeyPress = e => {
+    return e.key === "Enter" ? this.onSubmit() : null
   }
 
   onRouteChange = route => {
@@ -107,7 +109,11 @@ class App extends React.Component {
         {route === "home" ? (
           <div>
             <Rank />
-            <LinkForm onChange={this.onChange} onSubmit={this.onSubmit} />
+            <LinkForm
+              onChange={this.onChange}
+              onSubmit={this.onSubmit}
+              handleKeyPress={this.handleKeyPress}
+            />
             <Image box={box} imageURL={imageURL} />
           </div>
         ) : route === "signin" ? (
