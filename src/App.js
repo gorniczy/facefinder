@@ -7,7 +7,6 @@ import Image from "./components/image/Image"
 import Signin from "./components/signin/Signin"
 import Register from "./components/register/Register"
 import Particles from "react-particles-js"
-import Clarifai from "clarifai"
 import "./App.css"
 
 const particlesParams = {
@@ -28,31 +27,31 @@ const particlesParams = {
   }
 }
 
-const app = new Clarifai.App({ apiKey: "f0adc6d475564f23bd76e5847bc1f78a" })
+const initialState = {
+  input: "",
+  imageURL:
+    "https://aiahouston.org/media/content-images/placeholder-square.jpg",
+  box: {
+    leftCol: 0,
+    topRow: 0,
+    rightCol: 0,
+    bottomRow: 0
+  },
+  route: "signin",
+  isSignedIn: false,
+  user: {
+    id: "",
+    name: "",
+    email: "",
+    entries: 0,
+    joined: ""
+  }
+}
 
 class App extends React.Component {
   constructor() {
     super()
-    this.state = {
-      input: "",
-      imageURL:
-        "https://aiahouston.org/media/content-images/placeholder-square.jpg",
-      box: {
-        leftCol: 0,
-        topRow: 0,
-        rightCol: 0,
-        bottomRow: 0
-      },
-      route: "signin",
-      isSignedIn: false,
-      user: {
-        id: "",
-        name: "",
-        email: "",
-        entries: 0,
-        joined: ""
-      }
-    }
+    this.state = initialState;
   }
 
   loadUser = data => {
@@ -96,11 +95,17 @@ class App extends React.Component {
     this.setState({
       imageURL: this.state.input
     })
-    app.models
-      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+    fetch("https://floating-waters-72385.herokuapp.com/imageurl", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
+      .then(res => res.json())
       .then(response => {
         if (response) {
-          fetch("http://localhost:3001/image", {
+          fetch("https://floating-waters-72385.herokuapp.com/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -127,7 +132,7 @@ class App extends React.Component {
 
   onRouteChange = route => {
     if (route === "signout") {
-      this.setState({ isSignedIn: false })
+      this.setState(initialState)
     } else if (route === "home") {
       this.setState({ isSignedIn: true })
     }
@@ -144,8 +149,8 @@ class App extends React.Component {
           onRouteChange={this.onRouteChange}
           isSignedIn={isSignedIn}
         />
-        {route === "home" ? (
-          <div>
+        {route === "home"
+        ? <div>
             <Rank
               name={this.state.user.name}
               entries={this.state.user.entries}
@@ -157,10 +162,9 @@ class App extends React.Component {
             />
             <Image box={box} imageURL={imageURL} />
           </div>
-        ) : route === "signin" ? (
-          <Signin onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
-        ) : (
-          <Register
+        : (route === "signin"
+        ? <Signin onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
+        : <Register
             onRouteChange={this.onRouteChange}
             loadUser={this.loadUser}
           />
